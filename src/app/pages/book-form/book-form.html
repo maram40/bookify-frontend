@@ -1,0 +1,74 @@
+<div class="form-container">
+  <h2>{{ bookId() ? 'Edit Book' : 'Add New Book' }}</h2>
+
+  @if (loadingBook()) {
+    <p class="status-message">Loading book...</p>
+  } @else {
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" />
+        @if (bookForm.get('title')?.invalid && bookForm.get('title')?.touched) {
+          @if (bookForm.get('title')?.errors?.['required']) {
+            <div class="error-message">*Title is required</div>
+          }
+          @if (bookForm.get('title')?.errors?.['minlength']) {
+            <div class="error-message">*Title must be at least 3 characters</div>
+          }
+          @if (bookForm.get('title')?.errors?.['maxlength']) {
+            <div class="error-message">*Title cannot exceed 100 characters</div>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input id="category" type="text" formControlName="category" placeholder="e.g. Fiction" />
+        @if (bookForm.get('category')?.invalid && bookForm.get('category')?.touched) {
+          <div class="error-message">*Category is required</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price ($)</label>
+        <input id="price" type="number" step="0.01" formControlName="price" />
+        @if (bookForm.get('price')?.invalid && bookForm.get('price')?.touched) {
+          @if (bookForm.get('price')?.errors?.['required']) {
+            <div class="error-message">*Price is required</div>
+          }
+          @if (bookForm.get('price')?.errors?.['min']) {
+            <div class="error-message">*Price cannot be negative</div>
+          }
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="4" formControlName="description"></textarea>
+        @if (bookForm.get('description')?.errors?.['maxlength']) {
+          <div class="error-message">*Description cannot exceed 1000 characters</div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="image">Book Image</label>
+        <input id="image" type="file" accept="image/*" (change)="onFileSelected($event)" />
+      </div>
+
+      @if (errorMessage()) {
+        <div class="error-message">*{{ errorMessage() }}</div>
+      }
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="submit-btn" [disabled]="submitting()">
+          @if (submitting()) {
+            Saving...
+          } @else {
+            Save
+          }
+        </button>
+      </div>
+    </form>
+  }
+</div>

@@ -1,0 +1,109 @@
+.book-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.book-card.grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.book-card.grid .book-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.book-card.grid .book-info {
+  padding: 12px;
+  flex: 1;
+}
+
+.book-card.list {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+.book-card.list .book-image-sm {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.book-info-row {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.book-title {
+  font-weight: 600;
+  color: #1f1f1f;
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.book-card.list .book-title {
+  margin: 0;
+  min-width: 140px;
+}
+
+.book-category {
+  color: #71717a;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.book-price {
+  color: #a855f7;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.book-actions {
+  display: flex;
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+
+.book-card.list .book-actions {
+  padding: 0;
+}
+
+.book-actions button {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-view {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.btn-cart {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.btn-edit {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.btn-delete {
+  background: #fee2e2;
+  color: #b91c1c;
+}

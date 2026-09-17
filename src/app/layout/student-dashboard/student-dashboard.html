@@ -1,0 +1,22 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <a
+      class="nav-item"
+      routerLink=""
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      aria-label="Home"
+    >
+      🏠
+    </a>
+    <a class="nav-item" routerLink="search" routerLinkActive="active" aria-label="Search"> 🔍 </a>
+    <a class="nav-item" routerLink="cart" routerLinkActive="active" aria-label="Cart"> 🛒 </a>
+    <a class="nav-item" routerLink="profile" routerLinkActive="active" aria-label="Profile">
+      👤
+    </a>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

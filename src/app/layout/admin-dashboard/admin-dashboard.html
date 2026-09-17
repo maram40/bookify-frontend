@@ -1,0 +1,22 @@
+<div class="admin-layout">
+  <header class="admin-header">
+    <span class="admin-title">📚 Bookify Admin</span>
+
+    <nav class="admin-nav">
+      <a
+        routerLink=""
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Manage Books
+      </a>
+      <a routerLink="profile" routerLinkActive="active-link">Profile</a>
+    </nav>
+
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </header>
+
+  <main class="admin-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,23 @@
+<div class="profile-page">
+  @if (loading()) {
+    <p class="status-message">Loading profile...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="status-message error">{{ errorMessage() }}</p>
+  }
+
+  @if (user(); as u) {
+    <div class="profile-card">
+      <img class="profile-avatar" [src]="'http://localhost:5000/uploads/' + u.imageUrl" [alt]="u.firstName" />
+      <h2>{{ u.firstName }} {{ u.lastName }}</h2>
+      <p class="profile-email">{{ u.email }}</p>
+      <p class="profile-role">{{ u.role }}</p>
+      @if (u.phone) {
+        <p class="profile-phone">{{ u.phone }}</p>
+      }
+
+      <button class="logout-btn" (click)="onLogout()">Logout</button>
+    </div>
+  }
+</div>

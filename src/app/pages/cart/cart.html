@@ -1,0 +1,25 @@
+<div class="cart-page">
+  <h2>My Cart</h2>
+
+  @if (cartService.items().length === 0) {
+    <p class="status-message">Your cart is empty</p>
+  } @else {
+    <ul class="cart-list">
+      @for (book of cartService.items(); track $index) {
+        <li class="cart-item">
+          <img class="cart-item-image" [src]="'http://localhost:5000' + book.image" [alt]="book.title" />
+          <div class="cart-item-info">
+            <span class="cart-item-title">{{ book.title }}</span>
+            <span class="cart-item-price">${{ book.price }}</span>
+          </div>
+          <button class="remove-btn" (click)="removeItem($index)">Remove</button>
+        </li>
+      }
+    </ul>
+
+    <div class="cart-summary">
+      <span class="cart-total">Total: ${{ cartService.totalPrice() }}</span>
+      <button class="clear-btn" (click)="clear()">Clear Cart</button>
+    </div>
+  }
+</div>

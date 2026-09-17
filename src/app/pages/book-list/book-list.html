@@ -1,0 +1,68 @@
+<div class="books-page">
+  <div class="books-toolbar">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search books..."
+      [value]="searchText()"
+      (input)="searchText.set($any($event.target).value)"
+    />
+
+    <select
+      class="category-select"
+      [value]="selectedCategory()"
+      (change)="selectedCategory.set($any($event.target).value)"
+    >
+      @for (category of categories(); track category) {
+        <option [value]="category">{{ category }}</option>
+      }
+    </select>
+
+    <div class="view-toggle">
+      <button
+        [class.active]="viewMode() === 'grid'"
+        (click)="setViewMode('grid')"
+        aria-label="Grid view"
+      >
+        ▦
+      </button>
+      <button
+        [class.active]="viewMode() === 'list'"
+        (click)="setViewMode('list')"
+        aria-label="List view"
+      >
+        ☰
+      </button>
+    </div>
+
+    @if (isAdmin) {
+      <button class="add-book-btn" (click)="addBook()">+ Add Book</button>
+    }
+  </div>
+
+  @if (loading()) {
+    <p class="status-message">Loading books...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="status-message error">{{ errorMessage() }}</p>
+  }
+
+  @if (!loading() && !errorMessage()) {
+    <div class="books-container" [class.grid]="viewMode() === 'grid'" [class.list]="viewMode() === 'list'">
+      @for (book of filteredBooks(); track book._id) {
+        <app-book-card
+          [book]="book"
+          [viewMode]="viewMode()"
+          [isAdmin]="isAdmin"
+          (view)="viewBook($event)"
+          (edit)="editBook($event)"
+          (remove)="onDeleteBook($event)"
+          (addToCart)="onAddToCart($event)"
+        ></app-book-card>
+      } @empty {
+        <p class="status-message">No books found.</p>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,39 @@
+@if (viewMode() === 'grid') {
+  <div class="book-card grid">
+    <img class="book-image" [src]="'http://localhost:5000' + book().image" [alt]="book().title" />
+    <div class="book-info">
+      <h3 class="book-title">{{ book().title }}</h3>
+      <p class="book-category">{{ book().category }}</p>
+      <p class="book-price">${{ book().price }}</p>
+    </div>
+    <div class="book-actions">
+      <button class="btn-view" (click)="onView()">View</button>
+      @if (!isAdmin()) {
+        <button class="btn-cart" (click)="onAddToCart()">Add to Cart</button>
+      }
+      @if (isAdmin()) {
+        <button class="btn-edit" (click)="onEdit()">Edit</button>
+        <button class="btn-delete" (click)="onDelete()">Delete</button>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="book-card list">
+    <img class="book-image-sm" [src]="'http://localhost:5000' + book().image" [alt]="book().title" />
+    <div class="book-info-row">
+      <span class="book-title">{{ book().title }}</span>
+      <span class="book-category">{{ book().category }}</span>
+      <span class="book-price">${{ book().price }}</span>
+    </div>
+    <div class="book-actions">
+      <button class="btn-view" (click)="onView()">View</button>
+      @if (!isAdmin()) {
+        <button class="btn-cart" (click)="onAddToCart()">Add to Cart</button>
+      }
+      @if (isAdmin()) {
+        <button class="btn-edit" (click)="onEdit()">Edit</button>
+        <button class="btn-delete" (click)="onDelete()">Delete</button>
+      }
+    </div>
+  </div>
+}

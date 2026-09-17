@@ -1,0 +1,115 @@
+<div class="form-container">
+  <h2>Create Account</h2>
+
+  <form [formRoot]="signupForm">
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="firstName">First Name *</label>
+        <input id="firstName" type="text" placeholder="John" [formField]="signupForm.firstName" />
+        @if (signupForm.firstName().invalid() && signupForm.firstName().touched()) {
+          <div class="error-message">
+            @for (error of signupForm.firstName().errors(); track error) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group col">
+        <label for="lastName">Last Name *</label>
+        <input id="lastName" type="text" placeholder="Doe" [formField]="signupForm.lastName" />
+        @if (signupForm.lastName().invalid() && signupForm.lastName().touched()) {
+          <div class="error-message">
+            @for (error of signupForm.lastName().errors(); track error) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="email">Email Address *</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="john.doe@example.com"
+          [formField]="signupForm.email"
+        />
+        @if (signupForm.email().invalid() && signupForm.email().touched()) {
+          <div class="error-message">
+            @for (error of signupForm.email().errors(); track error) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group col">
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="tel" placeholder="0123456789" [formField]="signupForm.phone" />
+        @if (signupForm.phone().invalid() && signupForm.phone().touched()) {
+          <div class="error-message">
+            @for (error of signupForm.phone().errors(); track error) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="password">Password *</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="At least 8 characters"
+          [formField]="signupForm.password"
+        />
+        @if (signupForm.password().invalid() && signupForm.password().touched()) {
+          <div class="error-message">
+            @for (error of signupForm.password().errors(); track error) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">Profile Image</label>
+      <input id="imageUrl" type="file" accept="image/*" (change)="onFileSelected($event)" />
+    </div>
+
+    @if (signupForm().submitting()) {
+      <div class="error-message" style="color:#555">Creating your account...</div>
+    }
+
+    @if (signupError()) {
+      <div class="error-message">*{{ signupError() }}</div>
+    }
+
+    @if (signupForm().errors().length > 0) {
+      <div class="error-message">
+        @for (error of signupForm().errors(); track error) {
+          <p>*{{ error.message }}</p>
+        }
+      </div>
+    }
+
+    <button type="submit" class="submit-btn" [disabled]="signupForm().submitting()">
+      @if (signupForm().submitting()) {
+        Loading...
+      } @else {
+        Register
+      }
+    </button>
+
+    <p class="switch-link">
+      Already have an account?
+      <a routerLink="/signin">Sign in</a>
+    </p>
+  </form>
+</div>

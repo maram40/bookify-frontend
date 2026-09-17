@@ -1,0 +1,35 @@
+<div class="details-page">
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  @if (loading()) {
+    <p class="status-message">Loading book...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="status-message error">{{ errorMessage() }}</p>
+  }
+
+  @if (book(); as b) {
+    <div class="details-card">
+      <img class="details-image" [src]="'http://localhost:5000' + b.image" [alt]="b.title" />
+      <div class="details-info">
+        <h2>{{ b.title }}</h2>
+        <p class="details-category">{{ b.category }}</p>
+        <p class="details-price">${{ b.price }}</p>
+        @if (b.description) {
+          <p class="details-description">{{ b.description }}</p>
+        }
+
+        @if (!isAdmin) {
+          <button class="add-to-cart-btn" (click)="addToCart()" [disabled]="addedToCart()">
+            @if (addedToCart()) {
+              Added to Cart ✓
+            } @else {
+              Add to Cart
+            }
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>
